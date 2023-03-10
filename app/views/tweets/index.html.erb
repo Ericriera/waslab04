@@ -4,9 +4,11 @@
 
 <div id="tweets">
   <% @tweets.each do |tweet| %>
+
     <%= render tweet %>
     <p>
       <%= link_to "Show this tweet", tweet %>
+      <hr>
     </p>
   <% end %>
 </div>

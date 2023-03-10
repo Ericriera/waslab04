@@ -9,4 +9,8 @@
     <%= tweet.content %>
   </p>
 
+  <p>
+    <strong>Created at:</strong>
+    <%= tweet.created_at.strftime("%A, %F %H:%M") %>
+  </p>
 </div>
