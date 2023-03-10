@@ -1,5 +1,14 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: %i[ show edit update destroy ]
+  before_action :set_tweet, only: %i[ like show edit update destroy ]
+
+  def like
+    @tweet.likes = @tweet.likes + 1
+    @tweet.save
+    respond_to do |format|
+        format.html { redirect_to root_path }
+        format.json { head :no_content }
+    end
+  end
 
   # GET /tweets or /tweets.json
   def index
@@ -56,15 +65,15 @@ class TweetsController < ApplicationController
   def destroy
     if session[:created_ids].nil? || !session[:created_ids].include?(@tweet.id)
       respond_to do |format|
-      format.html { redirect_to tweets_url, notice: "You are not allowed to delete this tweet." }
-      format.json { head :Forbidden }
+        format.html { redirect_to tweets_url, notice: "You are not allowed to delete this tweet." }
+        format.json { head :Forbidden }
       end
     else
-    @tweet.destroy
+      @tweet.destroy
 
-    respond_to do |format|
-      format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
+        format.json { head :no_content }
       end
     end
   end
