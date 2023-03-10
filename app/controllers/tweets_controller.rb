@@ -25,6 +25,11 @@ class TweetsController < ApplicationController
 
     respond_to do |format|
       if @tweet.save
+        if !session[:created_ids].nil?
+          session[:created_ids].push(@tweet.id)
+        else
+          session[:created_ids] = [@tweet.id]
+        end
         format.html { redirect_to tweet_url(@tweet), notice: "Tweet was successfully created." }
         format.json { render :show, status: :created, location: @tweet }
       else
@@ -49,11 +54,18 @@ class TweetsController < ApplicationController
 
   # DELETE /tweets/1 or /tweets/1.json
   def destroy
+    if session[:created_ids].nil? || !session[:created_ids].include?(@tweet.id)
+      respond_to do |format|
+      format.html { redirect_to tweets_url, notice: "You are not allowed to delete this tweet." }
+      format.json { head :Forbidden }
+      end
+    else
     @tweet.destroy
 
     respond_to do |format|
       format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
       format.json { head :no_content }
+      end
     end
   end
 
