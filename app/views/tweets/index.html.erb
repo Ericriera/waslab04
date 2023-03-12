@@ -2,11 +2,21 @@
 
 <h1 class="wottitle">Wall of Tweets</h1>
 
+<div class="walltweet">
+
+</div>
 <%= link_to "New tweet", new_tweet_path %>
 
 <div id="tweets">
+  <% @actual_day = "" %>
   <% @tweets.each do |tweet| %>
-
+   <% @tweeet_day = tweet.created_at.strftime("%A, %B %d, %Y") %>
+    <% if @actual_day != @tweeet_day %>
+    <h3>
+      ......
+      <%= @actual_day = @tweeet_day %>
+    </h3>
+  <% end %>
     <%= render tweet %>
   <% end %>
 </div>
