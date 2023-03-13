@@ -11,17 +11,15 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :author, style: "display: block" %>
-    <%= form.text_field :author %>
-  </div>
+<table border=0 cellpadding=2>
+<tr>
+  <td><%= form.label :author%></td>
+  <td><%= form.text_field :author, size:"70"%></td>
+<tr>
+  <td><%= form.label :content%></td>
+  <td><%= form.text_area :content, rows:"2", cols:"70"%></td>
+  <td><%= form.submit :Tweet! %></td>
+</tr>
+</table>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div>
-    <%= form.submit :Tweet! %>
-  </div>
 <% end %>

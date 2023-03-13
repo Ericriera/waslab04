@@ -3,9 +3,8 @@
 <h1 class="wottitle">Wall of Tweets</h1>
 
 <div class="walltweet">
-
+  <%= render "form", tweet: @tweet %>
 </div>
-<%= link_to "New tweet", new_tweet_path %>
 
 <div id="tweets">
   <% @actual_day = "" %>
