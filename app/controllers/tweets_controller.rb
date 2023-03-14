@@ -43,7 +43,20 @@ class TweetsController < ApplicationController
         format.html { redirect_to index, notice: "Tweet was successfully created." }
         format.json { render :show, status: :created, location: @tweet }
       else
-        format.html { redirect_to index, notice: "Error." }
+        if @tweet.author.size() < 4 && @tweet.content.size() < 4
+          format.html { redirect_to index, notice: "Author is too short (minimum is 4 characters) and Content is too short (minimum is 4 characters)" }
+        end
+        if @tweet.author.size() < 4 && @tweet.content.size() > 280
+          format.html { redirect_to index, notice: "Author is too short (minimum is 4 characters) and Content is too long (maximum is 280 characters)" }
+        end
+        if @tweet.author.size() < 4
+          format.html { redirect_to index, notice: "Author is too short (minimum is 4 characters)" }
+        end
+        if @tweet.content.size() < 4
+          format.html { redirect_to index, notice: "Content is too short (minimum is 4 characters)" }
+        else
+          format.html { redirect_to index, notice: "Content is too long (maximum is 280 characters)" }
+        end
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
