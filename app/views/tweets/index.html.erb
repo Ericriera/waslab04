@@ -1,11 +1,19 @@
-<p style="color: green"><%= notice %></p>
-
 <h1 class="wottitle">Wall of Tweets</h1>
-
+<br>
 <div class="walltweet">
   <%= render "form", tweet: @tweet %>
 </div>
-
+<br>
+<% if notice %>
+<div class="wotitem" id="notice">
+  <% if notice[0] == "T" %>
+    <span style="color: green;"><%= notice %></span>
+  <% else %>
+    <span style="color: red;"><%= notice %></span>
+  <% end %>
+</div>
+<% end %>
+<br>
 <div id="tweets">
   <% @actual_day = "" %>
   <% @tweets.each do |tweet| %>

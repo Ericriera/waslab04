@@ -40,10 +40,10 @@ class TweetsController < ApplicationController
         else
           session[:created_ids] = [@tweet.id]
         end
-        format.html { redirect_to tweet_url(@tweet), notice: "Tweet was successfully created." }
+        format.html { redirect_to index, notice: "Tweet was successfully created." }
         format.json { render :show, status: :created, location: @tweet }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to index, notice: "Error." }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
